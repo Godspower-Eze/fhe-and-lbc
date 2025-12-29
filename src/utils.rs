@@ -38,8 +38,8 @@ pub fn generate_random_matrix(m: usize, n: usize, q: usize) -> Vec<Vec<i128>> {
     matrix
 }
 
-pub fn generate_random_bit_vector(n: usize) -> Vec<i128> {
-    generate_random_vector(n, 2)
+pub fn generate_random_bit_vector(m: usize) -> Vec<i128> {
+    generate_random_vector(m, 2)
 }
 
 pub fn sample_discrete_gaussian(sigma: f64) -> i128 {

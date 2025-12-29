@@ -1,0 +1,13 @@
+
+running 5 tests
+[[6, 6, 5, 6], [6, 6, 7, 5]], [3, 6, 0, 8], [1, 1, 1, 0], [6, 8], 9
+6, [10, 7], 3, 3
+1
+test utils::test::test_inner_product_and_add ... ok
+test pub_lwe::test::test_encrypt_and_decrypt ... ok
+test utils::test::test_generate_random_bit_vector ... ok
+test utils::test::test_transpose_matrix ... ok
+test utils::test::test_matrix_mul_vector ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

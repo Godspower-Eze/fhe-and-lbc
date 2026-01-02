@@ -57,7 +57,7 @@ fn decrypt(ciphertext: &(Vec<i128>, i128), secret_key: &Vec<i128>, q: i128) -> i
 
 #[cfg(test)]
 mod test {
-    use crate::{pub_lwe::{decrypt, encrypt, generate_public_key}, utils::{generate_random_bit_vector, generate_random_matrix, generate_random_vector, inner_product_and_add, sample_discrete_gaussian_vector}};
+    use crate::{pub_lwe::{decrypt, encrypt, generate_public_key}, utils::{generate_random_bit_vector, generate_random_matrix, generate_random_vector, sample_discrete_gaussian_vector}};
 
     #[test]
     fn test_generate_public_key() {

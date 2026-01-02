@@ -83,10 +83,31 @@ pub fn matrix_mul_vector(a: &Vec<Vec<i128>>, b: &Vec<i128>, q: i128) -> Vec<i128
     vector
 }
 
+pub fn center_mod(val: i128, q: i128) -> i128 {
+    let mut v = val.rem_euclid(q);
+    if v > q/2 {  // map large positives to negative
+        v -= q;
+    }
+    v
+}
+
 #[cfg(test)]
 mod test {
 
-    use crate::utils::{generate_random_bit_vector, inner_product_and_add, matrix_mul_vector, transpose_matrix};
+    use crate::utils::{center_mod, generate_random_bit_vector, inner_product_and_add, matrix_mul_vector, transpose_matrix};
+
+
+    #[test]
+    fn test_center_mod(){
+        let q = 11;
+        let elements = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let mut adjusted_elements = vec![];
+        for i in 0..q {
+            adjusted_elements.push(center_mod(elements[i], q as i128));
+        }
+        let expected_adjusted_elements = vec![0, 1, 2, 3, 4, 5, -5, -4, -3, -2, -1];
+        assert_eq!(adjusted_elements, expected_adjusted_elements)
+    }
 
     #[test]
     fn test_transpose_matrix() {

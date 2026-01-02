@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-use crate::utils::{add_vec, inner_product_and_add, matrix_mul_vector, transpose_matrix};
+use crate::utils::{add_vec, center_mod, inner_product_and_add, matrix_mul_vector, transpose_matrix};
 
 ////////////////////////////////////////////////////////////////////////////
 /// SETUP:
@@ -42,14 +42,6 @@ pub fn encrypt(public_key: &(Vec<Vec<i128>>, Vec<i128>), r: &Vec<i128>, message:
     let v = (inner_product_and_add(&public_key.1, &r, 0, q) + ((message as i128) * (q / 2))).rem_euclid(q);
     (u, v)
 }
-
-fn center_mod(val: i128, q: i128) -> i128 {
-    let mut v = val.rem_euclid(q);
-    if v > q/2 {  // map large positives to negative
-        v -= q;
-    }
-    v
-}
  
 fn decrypt(ciphertext: &(Vec<i128>, i128), secret_key: &Vec<i128>, q: i128) -> i128 {
     let u_s = inner_product_and_add(&ciphertext.0, &secret_key, 0, q);
@@ -65,19 +57,7 @@ fn decrypt(ciphertext: &(Vec<i128>, i128), secret_key: &Vec<i128>, q: i128) -> i
 
 #[cfg(test)]
 mod test {
-    use crate::{pub_lwe::{center_mod, decrypt, encrypt, generate_public_key}, utils::{generate_random_bit_vector, generate_random_matrix, generate_random_vector, inner_product_and_add, sample_discrete_gaussian_vector}};
-
-    #[test]
-    fn test_center_mod(){
-        let q = 11;
-        let elements = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let mut adjusted_elements = vec![];
-        for i in 0..q {
-            adjusted_elements.push(center_mod(elements[i], q as i128));
-        }
-        let expected_adjusted_elements = vec![0, 1, 2, 3, 4, 5, -5, -4, -3, -2, -1];
-        assert_eq!(adjusted_elements, expected_adjusted_elements)
-    }
+    use crate::{pub_lwe::{decrypt, encrypt, generate_public_key}, utils::{generate_random_bit_vector, generate_random_matrix, generate_random_vector, inner_product_and_add, sample_discrete_gaussian_vector}};
 
     #[test]
     fn test_generate_public_key() {

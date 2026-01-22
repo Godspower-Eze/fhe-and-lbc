@@ -2,7 +2,7 @@
 
 ## Public Key Cryptography based on Learning With Errors (LWE)
 
-[Check out implementation](/src/pub_lwe.rs)
+[Check out implementation!](/src/pub_lwe.rs)
 
 ### SETUP
 1. Pick $q$, $m$, $n$ and sigma where $q$ is the modulus, $m$ and $n$ are positive integers  and sigma is the standard deviation for the discrete guassian distribution
@@ -25,4 +25,7 @@
 ### CORRECTNESS CHECK
 For decryption to work properly, you have to pick $q$, $m$ and sigma so that $|e^Tr| \leq q/4$. 
 
-## [Residue Number System](/src/rns.rs)
+## Residue Number System
+
+[Check out implementation!](/src/rns.rs)
+

@@ -1,6 +1,8 @@
 # Implementations from Fully Homomorphic Encryption (FHE) and Lattice-based Cryptography
 
-## [Public Key Cryptography based on Learning With Errors (LWE)](/src/pub_lwe.rs)
+## Public Key Cryptography based on Learning With Errors (LWE)
+
+[Check out implementation](/src/pub_lwe.rs)
 
 ### SETUP
 1. Pick $q$, $m$, $n$ and sigma where $q$ is the modulus, $m$ and $n$ are positive integers  and sigma is the standard deviation for the discrete guassian distribution

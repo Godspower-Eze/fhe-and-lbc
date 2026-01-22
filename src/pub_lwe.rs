@@ -6,28 +6,6 @@
 
 use crate::utils::{add_vec, center_mod, inner_product_and_add, matrix_mul_vector, transpose_matrix};
 
-////////////////////////////////////////////////////////////////////////////
-/// SETUP:
-///     1. Pick q, m, n and sigma where q is the modulus, m and n are positive integers 
-///        and sigma is the standard deviation for the discrete guassian distribution
-/// 
-/// PROCESS:
-///     1. Generate the public key (A, b) 
-///        a. Sample random matrix: A <- Z_q^{m x n}
-///        b. Sample random vector: s <- Z_q^n. s is your secret key 
-///        c. Sample random error vector: e <- X^m (Small noise e.g discrete guassian).
-///        d. Compute b = As + e (mod q) 
-///     2. Encryption:
-///        a. Sample a random bit vector: r <- {0, 1}^m
-///        b. Pick your message m (m is 0 or 1) and compute (u, v)
-///           1. u = A^Tr (mod q) where A^T is transpose of A
-///           2. v = b^Tr + m.[q/2] (mod q) where b^T is the transpose of b and [q/2] is floor of q/2
-///     3. Decryption:
-///        a. Compute v - <u, s> where <u, s> is the inner product of vectors u and s. The result should be e^Tr + m[q/2]
-///        b. Decoding: if result is closer to 0, decrypt to 0 and if close to q/2 decrypt to 1
-/// 
-/// CORRECTNESS CHECK: For decryption to work properly, you have to pick q, m and sigma so that |e^Tr| <= q/4. 
-
 pub fn generate_public_key(a: &Vec<Vec<i128>>, secret_key: &Vec<i128>, sampled_error: &Vec<i128>, q:i128) -> (Vec<Vec<i128>>, Vec<i128>) {
     // Compute b = As + e
     debug_assert!(a[0].len() == secret_key.len(), "column of a should be equal to length of error vector");

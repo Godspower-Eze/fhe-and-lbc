@@ -100,7 +100,7 @@ mod test {
 
     #[test]
     fn test_encrypt_and_decrypt() {
-        let q = 11;
+        let q = 17;
         let m = 4;
         let n = 4; 
 

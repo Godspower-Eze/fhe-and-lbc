@@ -17,7 +17,7 @@
     3. $u = A^{\top}r \pmod{q}$ where $A^{\top}$ is transpose of $A$
     4. $v = b^{\top}r + m.\lfloor q/2 \rfloor \pmod{q}$ where $b^{\top}$ is the transpose of $b$ and $\lfloor q/2 \rfloor$ is the floor of $q/2$
 3. Decryption:
-    1. Compute $v - \langle u, s \rangle$ where $\langle u, s \rangle$ is the inner product of vectors $u$ and $s$. The result should be $e^{\top}r + m\lfloor q/2 \rfloor$
+    1. Compute $v - \langle u, s \rangle$ where $\langle u, s \rangle$ is the inner product of vectors $u$ and $s$. The result should be $e^{\top}r + m \cdot \lfloor q/2 \rfloor$
     2. Decoding: if result is closer to $0$, decrypt to $0$ and if close to $q/2$ decrypt to $1$
  
 ### CORRECTNESS CHECK

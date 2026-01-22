@@ -91,10 +91,71 @@ pub fn center_mod(val: i128, q: i128) -> i128 {
     v
 }
 
+pub fn mod_inv(a: i128, q: i128) -> Option<i128> {
+    let (mut a, mut m0) = (a, q);
+    let (mut x0, mut x1) = (0, 1);
+
+    if q == 1 { return Some(0); }
+    while a > 1 {
+        println!("{}", m0);
+        let q = a / m0;
+        let mut t = m0;
+
+        m0 = a % m0;
+        a = t;
+        t = x0;
+
+        x0 = x1 - q * x0;
+        x1 = t;
+    }
+
+    if x1 < 0 { x1 += q; }
+    Some(x1)
+}
+
+pub fn sieve_primes(limit: usize) -> Vec<usize> {
+    if limit < 2 {
+        return vec![];
+    }
+
+    let mut is_prime = vec![true; limit + 1];
+    is_prime[0] = false;
+    is_prime[1] = false;
+
+    for i in 2..=((limit as f64).sqrt() as usize) {
+        if is_prime[i] {
+            let mut multiple = i * i;
+            while multiple <= limit {
+                is_prime[multiple] = false;
+                multiple += i;
+            }
+        }
+    }
+
+    is_prime.iter()
+            .enumerate()
+            .filter_map(|(i, &prime)| if prime { Some(i) } else { None })
+            .collect()
+}
+
+pub fn generate_primes(n: usize) -> Vec<i128> {
+    let mut primes = vec![];
+    let mut candidate = 2;
+
+    while primes.len() < n {
+        if primes.iter().all(|p| candidate % p != 0) {
+            primes.push(candidate as i128);
+        }
+        candidate += 1;
+    }
+
+    primes
+}
+
 #[cfg(test)]
 mod test {
 
-    use crate::utils::{center_mod, generate_random_bit_vector, inner_product_and_add, matrix_mul_vector, transpose_matrix};
+    use crate::utils::{center_mod, generate_random_bit_vector, inner_product_and_add, matrix_mul_vector, mod_inv, transpose_matrix};
 
 
     #[test]
@@ -150,5 +211,13 @@ mod test {
         let result = inner_product_and_add(&vec_1, &vec_2, s, q);
         let expected_result = 2;
         assert_eq!(expected_result, result);
+    }
+
+    #[test]
+    fn test_mod_inv() {
+        let a = 7;
+        let m = 5;
+        let inv = mod_inv(a, m).unwrap();
+        assert_eq!(inv, 3);
     }
 }

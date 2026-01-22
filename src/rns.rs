@@ -26,21 +26,20 @@ mod test {
     use crate::{rns::{construct, deconstruct}, utils::generate_primes};
 
     #[test]
-    fn construct_and_deconstruct() {
-    let rounds = 100;
-    let mut rng = rand::rng();
+    fn test_construct_and_deconstruct() {
+        let rounds = 100;
+        let mut rng = rand::rng();
+        for _ in 0..rounds {
+            // Generate a random 5-digit number
+            let x: i128 = rng.random_range(10000..100000);
 
-    for _ in 0..rounds {
-        // Generate a random 5-digit number
-        let x: i128 = rng.random_range(10000..100000);
+            let k = 20;
+            let q = generate_primes(k);
 
-        let k = 20;
-        let q = generate_primes(k);
+            let x_i = construct(x, &q);
 
-        let x_i = construct(x, &q);
-
-        let actual = deconstruct(&x_i, &q);
-        assert_eq!(x, actual);
+            let actual = deconstruct(&x_i, &q);
+            assert_eq!(x, actual);
+        }
     }
-}
 }

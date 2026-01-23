@@ -29,7 +29,7 @@ For decryption to work properly, you have to pick $q$, $m$ and sigma so that $|e
 
 [Check out the implementation!](/src/rns.rs)
 
-RNS is a mechanism used in multiple FHE schemees to operate on large numbers exceeding the limits available in the cryptosystem.
+RNS is a mechanism used in multiple FHE schemes to operate on large numbers exceeding the limits available in the cryptosystem.
 
 This is simply a way of breaking a number into a tuple of numbers and this is made possible by the **Chinese Remainder Theorem**.
 

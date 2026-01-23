@@ -14,7 +14,7 @@
     3. Sample random error vector: $e \leftarrow X^m$ (Small noise e.g discrete guassian)
     4. Compute $b = As + e \pmod{q}$ 
 2. **Encryption**:
-    1. Sample a random bit vector: $r \leftarrow \{ 0, 1 \}^m$
+    1. Sample a random bit vector: $r \leftarrow \lbrace 0, 1 \rbrace^m$
     2. Pick your message $m$ ($m$ is $0$ or $1$) and compute $(u, v)$
     3. $u = A^{\top}r \pmod{q}$ where $A^{\top}$ is transpose of $A$
     4. $v = b^{\top}r + m \cdot \lfloor \dfrac{q}{2} \rfloor \pmod{q}$ where $b^{\top}$ is the transpose of $b$ and $\lfloor \dfrac{q}{2} \rfloor$ is the floor of $\dfrac{q}{2}$

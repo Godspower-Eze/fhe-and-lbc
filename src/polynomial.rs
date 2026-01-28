@@ -119,22 +119,25 @@ impl Polynomial {
     }
 
     pub fn multiply(&self, other: &Polynomial, modulus: u64) -> Polynomial {
-        debug_assert_eq!(self.degree, other.degree, "Polynomials must have same degree");
-        
+        debug_assert_eq!(
+            self.degree, other.degree,
+            "Polynomials must have same degree"
+        );
+
         let max_degree = self.degree * 2 - 1; // Maximum degree for convolution
-        let mut result = vec![0u64; self.degree];
-        
+        let mut result = vec![0u64; max_degree];
+
         for i in 0..self.degree {
             for j in 0..other.degree {
                 if self.coefficients[i] != 0 && other.coefficients[j] != 0 {
-                    let k = (i + j) % self.degree;
+                    let k: usize = i + j;
                     let product = self.coefficients[i] as u128 * other.coefficients[j] as u128;
                     let current = result[k] as u128 + product;
                     result[k] = (current % modulus as u128) as u64;
                 }
             }
         }
-        
+
         Polynomial {
             coefficients: result,
             degree: self.degree,

@@ -113,31 +113,6 @@ pub fn mod_inv(a: i128, q: i128) -> Option<i128> {
     Some(x1)
 }
 
-pub fn sieve_primes(limit: usize) -> Vec<usize> {
-    if limit < 2 {
-        return vec![];
-    }
-
-    let mut is_prime = vec![true; limit + 1];
-    is_prime[0] = false;
-    is_prime[1] = false;
-
-    for i in 2..=((limit as f64).sqrt() as usize) {
-        if is_prime[i] {
-            let mut multiple = i * i;
-            while multiple <= limit {
-                is_prime[multiple] = false;
-                multiple += i;
-            }
-        }
-    }
-
-    is_prime.iter()
-            .enumerate()
-            .filter_map(|(i, &prime)| if prime { Some(i) } else { None })
-            .collect()
-}
-
 pub fn generate_primes(n: usize) -> Vec<i128> {
     let mut primes = vec![];
     let mut candidate = 2;
